@@ -117,10 +117,10 @@ int* init_field(int* ships) {
 
 	/*printf("1. Dodaj statki jednomasztowe\n");
 	for (int i = 0; i < 4; i++) {
-		printf("Podaj x:");
+		printf("Podaj x literowo:");
 		scanf_s(" %c", &letter);
 		x = letter_to_int(letter);
-		printf("Podaj y:");
+		printf("Podaj y cyfrowo:");
 		scanf_s("%d", &y);
 		if (new_ship(ships, h, boat, x, y) == 0) {
 			printf("Nie wolno ustawic statek z podaną kordynatą!\n");
@@ -130,10 +130,10 @@ int* init_field(int* ships) {
 
 	printf("2. Dodaj statki dwumasztowe\n");
 	for (int i = 0; i < 3; i++) {
-		printf("Podaj x:");
+		printf("Podaj x literowo:");
 		scanf_s(" %c", &letter);
 		x = letter_to_int(letter);
-		printf("Podaj y:");
+		printf("Podaj y cyfrowo:");
 		scanf_s("%d", &y);
 		if (new_ship(ships, h, submarine, x, y) == 0) {
 			printf("Nie wolno ustawic statek z podana kordynata!\n");
@@ -143,26 +143,26 @@ int* init_field(int* ships) {
 
 	printf("3. Dodaj statki trzymasztowe\n");
 	for (int i = 0; i < 2; i++) {
-		printf("Podaj x:");
+		printf("Podaj x literowo:");
 		scanf_s(" %c", &letter);
 		x = letter_to_int(letter);
-		printf("Podaj y:");
+		printf("Podaj y cyfrowo:");
 		scanf_s("%d", &y);
 		if (new_ship(ships, h, cruiser, x, y) == 0) {
-			printf("Nie wolno ustawic statek z podana kordynata!\n");
+			printf("Nie wolno ustawic statek z podana koordynata!\n");
 			i = i - 1;
 		}
 	}
 
 	printf("4. Dodaj statki czteromasztowe\n");
 	for (int i = 0; i < 1; i++) {
-		printf("Podaj x:");
+		printf("Podaj x literowo:");
 		scanf_s(" %c", &letter);
 		x = letter_to_int(letter);
-		printf("Podaj y:");
+		printf("Podaj y cyfrowo:");
 		scanf_s("%d", &y);
 		if (new_ship(ships, h, battleship, x, y) == 0) {
-			printf("Nie wolno ustawic statek z podana kordynata!\n");
+			printf("Nie wolno ustawic statek z podana koordynata!\n");
 			i = i - 1;
 		}
 	}

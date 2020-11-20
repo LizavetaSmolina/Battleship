@@ -32,19 +32,19 @@ void game(char* user_field, char* computer_field, int* user_ships, int* computer
 	while (finish_game(user_ships) == 0 && finish_game(computer_ships) == 0) {
 		print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 
-		printf("Podaj x:");
+		printf("Podaj x literowo:");
 		scanf_s(" %c", &letter);
 
 		x = letter_to_int(letter);
-		printf("Podaj y:");
+		printf("Podaj y cyfrowo:");
 		scanf_s("%d", &y);
 
 		while (shot(computer_ships, x, y, user_hits) == 0) {
-			printf("Podana koordytana już niedostępna! \n");
-			printf("Podaj x:");
+			printf("Podaj x literowo:");
 			scanf_s(" %c", &letter);
+
 			x = letter_to_int(letter);
-			printf("Podaj y:");
+			printf("Podaj y cyfrowo:");
 			scanf_s("%d", &y);
 		}
 		x = rand() % 10 + 1;

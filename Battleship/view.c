@@ -59,6 +59,7 @@ void print_fields(char* user_field, char* computer_field, int* user_ships, int* 
 		}
 		printf("\n");
 	}
+	printf("\n");
 }
 
 int letter_to_int(char x) {
