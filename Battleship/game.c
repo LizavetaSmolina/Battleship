@@ -23,13 +23,14 @@ int shot(int* ships, int x, int y, int* hits) {
 	return 1;
 }
 
+
 void game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits) {
 
 	int x, y; 
 	char letter;
 
 	while (finish_game(user_ships) == 0 && finish_game(computer_ships) == 0) {
-		print_fields(user_field, computer_field, user_ships, computer_ships);
+		print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 
 		printf("Podaj x:");
 		scanf_s(" %c", &letter);
@@ -56,7 +57,7 @@ void game(char* user_field, char* computer_field, int* user_ships, int* computer
 		system("cls");
 	}
 
-	print_fields(user_field, computer_field, user_ships, computer_ships);
+	print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 	if (finish_game(computer_ships) == 1) printf("UZYTKOWNIK WYGRAL!");
 	else if (finish_game(user_ships) == 1) printf("UZYTKOWNIK PRZEGRAL!");
 }

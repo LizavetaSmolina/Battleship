@@ -20,7 +20,7 @@ void print_field(char* field, int* ships) {
 	}
 }
 
-void print_fields(char* user_field, char* computer_field, int* user_ships, int* computer_ships) {
+void print_fields(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits) {
 	printf("   USER                		   COMPUTER           \n\n");
 	printf("   A B C D E F G H I J		   A B C D E F G H I J\n");
 	for (int i = 0; i < 22; i++) {
@@ -49,6 +49,10 @@ void print_fields(char* user_field, char* computer_field, int* user_ships, int* 
 		for (int j = 0; j < 10; j++) {
 			if (*(computer_ships + i * 10 + j) == 2) {
 				*(computer_field + i * 10 + j) = 'X';
+				printf("%c ", *(computer_field + i * 10 + j));
+			}
+			else if (*(computer_ships + i * 10 + j) != 2 && *(user_hits + i * 10 + j) == 1) {
+				*(computer_field + i * 10 + j) = '*';
 				printf("%c ", *(computer_field + i * 10 + j));
 			}
 			else printf(". ");

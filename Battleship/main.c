@@ -13,7 +13,7 @@ int main() {
 	int* user_ships = new_int_array();
 	int* computer_ships = new_int_array();
 
-	print_fields(user_field, computer_field, user_ships, computer_ships);
+	print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 
 
 	computer_ships = init_field_random(computer_ships);
