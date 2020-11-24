@@ -12,6 +12,7 @@ void print_fields(char*, char*, int*, int*, int*);
 int finish_game(int*);
 int shot(int*, int, int, int*);
 void game(char*, char*, int*, int*, int*, int*);
-int check(int*, int x, int y);
+int check(int*, int x, int y); 
+void save_game(char*, char*, int*, int*, int*, int*, FILE* );
 
 #endif

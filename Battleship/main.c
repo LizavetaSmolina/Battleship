@@ -1,10 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <sys\stat.h>
 #include "functions.h"
 
 int main() {
 
 	srand(time(NULL));
+	FILE* game_file;
+		//= creat("file.txt", S_IREAD | S_IWRITE);;
+
 	char* user_field = new_field();
 	char* computer_field = new_field();
 
@@ -22,6 +26,8 @@ int main() {
 	system("cls");
 
 	game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits);
+
+	save_game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits, &game_file);
 
 	return 0;
 }

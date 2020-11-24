@@ -50,12 +50,12 @@ int new_ship(int* field, enum direction dir, enum type_of_ship type, int x, int 
 			}
 		}
 		else {
-			if (x > 10 || x < 1 || y + 1 < 1 || y > 10) return 0;
+			if (x > 10 || x < 1 || y < 1 || y + 1> 10) return 0;
 			x--; y--;
-			for (int i = x; i < x + 2; i++) {
+			for (int i = y; i < y + 2; i++) {
 				if (*(field + i * 10 + x) == 1 || check(field, x, i) == 0) return 0;
 			}
-			for (int i = x; i < x + 2; i++) {
+			for (int i = y; i < y + 2; i++) {
 				*(field + i * 10 + x) = 1;
 			}
 		}
@@ -72,12 +72,12 @@ int new_ship(int* field, enum direction dir, enum type_of_ship type, int x, int 
 			}
 		}
 		else {
-			if (x > 10 || x < 1 || y + 2 < 1 || y > 10) return 0;
+			if (x > 10 || x < 1 || y < 1 || y + 2 > 10) return 0;
 			x--; y--;
-			for (int i = x; i < x + 3; i++) {
+			for (int i = y; i < y + 3; i++) {
 				if (*(field + i * 10 + x) == 1 || check(field, x, i) == 0) return 0;
 			}
-			for (int i = x; i < x + 3; i++) {
+			for (int i = y; i < y + 3; i++) {
 				*(field + i * 10 + x) = 1;
 			}
 		}
@@ -94,12 +94,12 @@ int new_ship(int* field, enum direction dir, enum type_of_ship type, int x, int 
 			}
 		}
 		else {
-			if (x > 10 || x < 1 || y + 3 < 1 || y > 10) return 0;
+			if (x > 10 || x < 1 || y < 1 || y + 3 > 10) return 0;
 			x--; y--;
-			for (int i = x; i < x + 4; i++) {
+			for (int i = y; i < y + 4; i++) {
 				if (*(field + i * 10 + x) == 1 || check(field, x, i) == 0) return 0;
 			}
-			for (int i = x; i < x + 4; i++) {
+			for (int i = y; i < y + 4; i++) {
 				*(field + i * 10 + x) = 1;
 			}
 		}
@@ -128,10 +128,9 @@ int check(int* ships, int x, int y) {
 }
 
 int* init_field(int* ships) {
-	//enum direction dir;
 	int x, y;
 	char letter;
-
+	
 	printf("1. Dodaj statki jednomasztowe\n");
 	for (int i = 0; i < 4; i++) {
 		printf("Podaj x literowo:");
@@ -157,7 +156,7 @@ int* init_field(int* ships) {
 			i = i - 1;
 		}
 	}
-
+	
 	printf("3. Dodaj statki trzymasztowe\n");
 	for (int i = 0; i < 2; i++) {
 		printf("Podaj x literowo:");
@@ -189,7 +188,7 @@ int* init_field(int* ships) {
 
 int* init_field_random(int* ships) {
 	int y, x, d;
-
+	
 	for (int i = 0; i < 4; i++) {
 		x = rand() % 10 + 1;
 		y = rand() % 10 + 1;
@@ -221,7 +220,7 @@ int* init_field_random(int* ships) {
 			}
 		}
 	}
-
+	
 	for (int i = 0; i < 2; i++) {
 		x = rand() % 10 + 1;
 		y = rand() % 10 + 1;
