@@ -8,9 +8,10 @@ int letter_to_int(char);
 int* init_field(int*);
 int* init_field_random(int*);
 void print_field(char*, int*);
-void print_fields(char*, char*, int*, int*);
+void print_fields(char*, char*, int*, int*, int*);
 int finish_game(int*);
 int shot(int*, int, int, int*);
 void game(char*, char*, int*, int*, int*, int*);
+int check(int*, int x, int y);
 
 #endif

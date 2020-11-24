@@ -17,7 +17,7 @@ int main() {
 
 
 	computer_ships = init_field_random(computer_ships);
-	//print_field(computer_field, computer_ships);
+	print_field(computer_field, computer_ships);
 	user_ships = init_field(user_ships);
 	system("cls");
 

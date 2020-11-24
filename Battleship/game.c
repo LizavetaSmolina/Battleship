@@ -32,27 +32,22 @@ void game(char* user_field, char* computer_field, int* user_ships, int* computer
 	while (finish_game(user_ships) == 0 && finish_game(computer_ships) == 0) {
 		print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 
-		printf("Podaj x literowo:");
-		scanf_s(" %c", &letter);
-
-		x = letter_to_int(letter);
-		printf("Podaj y cyfrowo:");
-		scanf_s("%d", &y);
-
-		while (shot(computer_ships, x, y, user_hits) == 0) {
+		int s = 0;
+		while (s == 0) {
 			printf("Podaj x literowo:");
 			scanf_s(" %c", &letter);
 
 			x = letter_to_int(letter);
 			printf("Podaj y cyfrowo:");
 			scanf_s("%d", &y);
+			s = shot(computer_ships, x, y, user_hits);
 		}
-		x = rand() % 10 + 1;
-		y = rand() % 10 + 1;
-		while (shot(user_ships, x, y, computer_hits) == 0) {
 
+		s = 0;
+		while (s == 0) {
 			x = rand() % 10 + 1;
 			y = rand() % 10 + 1;
+			s = shot(user_ships, x, y, computer_hits);
 		}
 		system("cls");
 	}
