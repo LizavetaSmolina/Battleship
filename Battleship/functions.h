@@ -13,6 +13,9 @@ int finish_game(int*);
 int shot(int*, int, int, int*);
 void game(char*, char*, int*, int*, int*, int*);
 int check(int*, int x, int y); 
-void save_game(char*, char*, int*, int*, int*, int*, FILE* );
+int save_game(char*, char*, int*, int*, int*, int*, FILE* );
+int cont_game(char*, char*, int*, int*, int*, int*, FILE*);
+void new_game(char* , char* , int* , int* , int* , int* );
+void prev_game(char* , char* , int* , int* , int* , int* );
 
 #endif
