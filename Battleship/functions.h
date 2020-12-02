@@ -11,11 +11,11 @@ void print_field(char*, int*);
 void print_fields(char*, char*, int*, int*, int*);
 int finish_game(int*);
 int shot(int*, int, int, int*);
-void game(char*, char*, int*, int*, int*, int*);
+void game(char*, char*, int*, int*, int*, int*, FILE*);
 int check(int*, int x, int y); 
 int save_game(char*, char*, int*, int*, int*, int*, FILE* );
 int cont_game(char*, char*, int*, int*, int*, int*, FILE*);
-void new_game(char* , char* , int* , int* , int* , int* );
-void prev_game(char* , char* , int* , int* , int* , int* );
+void new_game(char* , char* , int* , int* , int* , int*, FILE*);
+void prev_game(char* , char* , int* , int* , int* , int*, FILE*);
 
 #endif

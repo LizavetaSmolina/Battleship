@@ -1,5 +1,6 @@
 ﻿#include <stdio.h>
 #include "functions.h"
+#include "curses.h"
 
 int finish_game(int* field) {
 	for (int i = 0; i < 10; i++) {
@@ -24,12 +25,12 @@ int shot(int* ships, int x, int y, int* hits) {
 }
 
 
-void game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits) {
+void game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits, FILE* file) {
 
-	int x, y; 
+	int x, y;
 	char letter;
 
-	while (finish_game(user_ships) == 0 && finish_game(computer_ships) == 0) {
+	while (finish_game(user_ships) == 0 && finish_game(computer_ships) == 0 ) {
 		print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 
 		int s = 0;
@@ -51,10 +52,16 @@ void game(char* user_field, char* computer_field, int* user_ships, int* computer
 		}
 		system("cls");
 	}
-
+	system("cls");
 	print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
-	if (finish_game(computer_ships) == 1) printf("UZYTKOWNIK WYGRAL!"); 
-	else if (finish_game(user_ships) == 1) printf("UZYTKOWNIK PRZEGRAL!");
+	if (finish_game(computer_ships) == 1) {
+		printf("UZYTKOWNIK WYGRAL!\n");
+		save_game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits, &file);
+	}
+	else if (finish_game(user_ships) == 1) printf("UZYTKOWNIK PRZEGRAL!\n");
+	
+	printf("To exit press esc...");
+	while (!kbhit());
 }
 
 int save_game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits, FILE* file) {
@@ -70,6 +77,7 @@ int save_game(char* user_field, char* computer_field, int* user_ships, int* comp
 			for (int j = 0; j < 10; j++) {
 				if (*(user_ships + i * 10 + j) == 1) *(user_field + i * 10 + j) = 'O';
 				if (*(user_ships + i * 10 + j) == 2) *(user_field + i * 10 + j) = 'X';
+				if (*(user_ships + i * 10 + j) == 1 && *(computer_hits + i * 10 + j) == 1) *(user_field + i * 10 + j) = '*';
 				fprintf(file, "%c", *(user_field + i * 10 + j));
 			}
 			
@@ -78,12 +86,14 @@ int save_game(char* user_field, char* computer_field, int* user_ships, int* comp
 			for (int j = 0; j < 10; j++) {
 				if (*(computer_ships + i * 10 + j) == 1) *(computer_field + i * 10 + j) = 'O';
 				if (*(computer_ships + i * 10 + j) == 2) *(computer_field + i * 10 + j) = 'X';
+				if (*(user_ships + i * 10 + j) == 1 && *(user_hits + i * 10 + j) == 1) *(user_field + i * 10 + j) = '*';
 				fprintf(file, "%c", *(computer_field + i * 10 + j));
 			}
 			fprintf(file, "\n");
 		}
 		fprintf(file, "\n");
 		fclose(file);
+		
 		return 1;
 	}
 }
@@ -107,6 +117,9 @@ int cont_game(char* user_field, char* computer_field, int* user_ships, int* comp
 					*(user_ships + i * 10 + j) = 2;
 					*(computer_hits + i * 10 + j) = 1;
 				}
+				else if (c == '*') {
+					*(computer_hits + i * 10 + j) = 1;
+				}
 				else *(user_ships + i * 10 + j) = 0;
 			}
 
@@ -121,6 +134,9 @@ int cont_game(char* user_field, char* computer_field, int* user_ships, int* comp
 					*(computer_ships + i * 10 + j) = 2;
 					*(user_hits + i * 10 + j) = 1;
 				}
+				else if (c == '*') {
+					*(user_hits + i * 10 + j) = 1;
+				}
 				else *(computer_ships + i * 10 + j) = 0;
 				printf("%c ", c);
 			}
@@ -132,19 +148,26 @@ int cont_game(char* user_field, char* computer_field, int* user_ships, int* comp
 	}
 }
 
-void new_game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits) {
+
+
+void prev_game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits, FILE* game_file) {
+
+	game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits, &game_file);
+
+}
+
+void new_game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits, FILE* game_file) {
+	user_field = new_field();
+	computer_field = new_field();
+	user_hits = new_int_array();
+	computer_hits = new_int_array();
+	user_ships = new_int_array();
+	computer_ships = new_int_array();
 
 	print_fields(user_field, computer_field, user_ships, computer_ships, user_hits);
 	computer_ships = init_field_random(computer_ships);
 	print_field(computer_field, computer_ships);
 	user_ships = init_field(user_ships);
 	system("cls");
-	game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits);
-}
-
-void prev_game(char* user_field, char* computer_field, int* user_ships, int* computer_ships, int* user_hits, int* computer_hits) {
-
-	system("cls");
-	game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits);
-
+	game(user_field, computer_field, user_ships, computer_ships, user_hits, computer_hits, &game_file);
 }
